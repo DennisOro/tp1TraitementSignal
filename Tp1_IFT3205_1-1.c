@@ -1,6 +1,6 @@
 /*------------------------------------------------------*/
 /* Prog    : Tp1_IFT3205-1-1.c                          */
-/* Auteur  :                                            */
+/* Auteur  : Dennis Orozco Martinez                                           */
 /* Date    : 18/05/2010                                 */
 /* version :                                            */ 
 /* langage : C                                          */
