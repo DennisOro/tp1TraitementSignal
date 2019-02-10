@@ -2,7 +2,7 @@
 /* module  : FonctionDemo1.h                         */
 /* auteur  : Max Mignotte                            */
 /* revision:                                         */
-/* date    : 18/05/2010                              */              
+/* date    : 18/05/2010                              */
 /* langage : C                                       */
 /* labo    : DIRO                                    */
 /*---------------------------------------------------*/
@@ -57,5 +57,6 @@ void    Mult(float**,float,int,int);
 void    Recal(float**,int,int);
 void    MultMatrix(float**,float**,float**,float**,float**,float**,int,int);
 void    SquareMatrix(float**,float**,float**,float**,int,int);
+int     power(int, int);
 
 #endif

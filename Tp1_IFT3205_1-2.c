@@ -21,13 +21,29 @@
 /* DEFINITIONS -----------------------------------*/
 /*------------------------------------------------*/
 #define NAME_VISUALISER "display "
-#define NAME_IMG_IN  "D1r"
-#define NAME_IMG_OUT "image-Tp1_IFT3205-1-1"
+#define NAME_IMG_IN  "D46r"
+#define NAME_IMG_OUT "image-Tp1_IFT3205-1-2"
 
 /*------------------------------------------------*/
 /* PROTOTYPE DE FONCTIONS  -----------------------*/
 /*------------------------------------------------*/
-void CenterImg(float** ,int, int);
+void CenterImg(float** , int, int);
+int  power(int, int);
+
+/*------------------------------------------------*/
+/* IMPLEMENTATION DE FONCTIONS DEMANDEE ----------*/
+/*------------------------------------------------*/
+void CenterImg(float** Img, int length, int width)
+  {
+    int i=0;
+    int j=0;
+
+    for(i=0;i<length;i++)
+      for(j=0;j<width;j++)
+        {
+  	Img[i][j]=Img[i][j] * power((-1), (i+j));
+        }
+  }
 
 /*------------------------------------------------*/
 /* PROGRAMME PRINCIPAL   -------------------------*/
@@ -53,6 +69,10 @@ int main(int argc,char **argv)
 	MatriceImgI[i][j]=0.0;
 	MatriceImgM[i][j]=0.0;
       }
+
+  /*CENTRER*/
+  CenterImg(MatriceImgR, length, width);
+  //CenterImg(MatriceImgI, length, width);
 
   /*FFT*/
   FFTDD(MatriceImgR,MatriceImgI,length,width);

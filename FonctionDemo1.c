@@ -1,7 +1,7 @@
 /*---------------------------------------------------*/
 /* module  : FonctionDemo1.c                         */
 /* auteur  : Mignotte Max                            */
-/* date    : 18/05/2010                              */              
+/* date    : 18/05/2010                              */
 /* langage : C                                       */
 /* labo    : DIRO                                    */
 /*---------------------------------------------------*/
@@ -27,10 +27,10 @@ float* fmatrix_allocate_1d(int hsize)
  {
   float* matrix;
 
-  matrix=(float*)malloc(sizeof(float)*hsize); 
+  matrix=(float*)malloc(sizeof(float)*hsize);
   if (matrix==NULL) printf("probleme d'allocation memoire");
 
-  return matrix; 
+  return matrix;
  }
 
 /*----------------------------------------------------------*/
@@ -47,7 +47,7 @@ float** fmatrix_allocate_2d(int vsize,int hsize)
 
   imptr=(float*)malloc(sizeof(float)*hsize*vsize);
   if (imptr==NULL) printf("probleme d'allocation memoire");
- 
+
   for(i=0;i<vsize;i++,imptr+=hsize) matrix[i]=imptr;
   return matrix;
  }
@@ -56,15 +56,15 @@ float** fmatrix_allocate_2d(int vsize,int hsize)
 /* Libere la memoire de la matrice 1d de float              */
 /*----------------------------------------------------------*/
 void free_fmatrix_1d(float* pmat)
- { 
-  free(pmat); 
+ {
+  free(pmat);
  }
 
 //----------------------------------------------------------*/
 /* Libere la memoire de la matrice 2d de float              */
 /*----------------------------------------------------------*/
 void free_fmatrix_2d(float** pmat)
- { 
+ {
   free(pmat[0]);
   free(pmat);
  }
@@ -80,7 +80,7 @@ float** LoadImagePgm(char* name,int *length,int *width)
   float** mat;
 
   char stringTmp1[NBCHAR],stringTmp2[NBCHAR],stringTmp3[NBCHAR];
- 
+
   int ta1,ta2,ta3;
   FILE *fic;
 
@@ -109,10 +109,10 @@ float** LoadImagePgm(char* name,int *length,int *width)
   *length=ta1;
   *width=ta2;
   mat=fmatrix_allocate_2d(*length,*width);
-   
+
   /*--chargement dans la matrice--*/
      for(i=0;i<*length;i++)
-      for(j=0;j<*width;j++)  
+      for(j=0;j<*width;j++)
         { fread(&var,1,1,fic);
           mat[i][j]=var; }
 
@@ -139,8 +139,8 @@ void SaveImagePgm(char* name,float** mat,int length,int width)
 
   /*--ouverture fichier--*/
   fic=fopen(buff,"w");
-    if (fic==NULL) 
-        { printf(" Probleme dans la sauvegarde de %s",buff); 
+    if (fic==NULL)
+        { printf(" Probleme dans la sauvegarde de %s",buff);
           exit(-1); }
   printf("\n Sauvegarde de %s au format pgm\n",name);
 
@@ -153,12 +153,12 @@ void SaveImagePgm(char* name,float** mat,int length,int width)
 
   /*--enregistrement--*/
      for(i=0;i<length;i++)
-      for(j=0;j<width;j++) 
+      for(j=0;j<width;j++)
         fprintf(fic,"%c",(char)mat[i][j]);
-   
+
   /*--fermeture fichier--*/
-   fclose(fic); 
- } 
+   fclose(fic);
+ }
 
 /*--------------*/
 /* FOURIER -----*/
@@ -250,13 +250,13 @@ void FFTDD(float** mtxR,float** mtxI,int lgth, int wdth)
  data=(float*)malloc(sizeof(float)*(2*wdth*lgth)+1);
  ImgFreqR=(float*)malloc(sizeof(float)*(wdth*lgth));
  ImgFreqI=(float*)malloc(sizeof(float)*(wdth*lgth));
- nn=(unsigned long*)malloc(sizeof(unsigned long)*(FFT2D+1)); 
+ nn=(unsigned long*)malloc(sizeof(unsigned long)*(FFT2D+1));
 
  /*Remplissage de nn*/
  nn[1]=lgth; nn[2]=wdth;
 
  /*Remplissage de data*/
- for(i=0;i<lgth;i++) for(j=0;j<wdth;j++) 
+ for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
    { data[2*(i*lgth+j)+1]=mtxR[i][j];
      data[2*(i*lgth+j)+2]=mtxI[i][j]; }
 
@@ -309,7 +309,7 @@ void IFFTDD(float** mtxR,float**  mtxI,int lgth,int wdth)
  nn[1]=lgth; nn[2]=wdth;
 
  /*Remplissage de data*/
- for(i=0;i<lgth;i++) for(j=0;j<wdth;j++) 
+ for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
    { data[2*(i*lgth+j)+1]=mtxR[i][j];
      data[2*(i*lgth+j)+2]=mtxI[i][j]; }
 
@@ -326,7 +326,7 @@ void IFFTDD(float** mtxR,float**  mtxI,int lgth,int wdth)
   { posy=(int)(i/wdth);
     posx=(int)(i%wdth);
 
-   mtxR[posy][posx]=ImgFreqR[i]/(wdth*lgth);  
+   mtxR[posy][posx]=ImgFreqR[i]/(wdth*lgth);
    mtxI[posy][posx]=ImgFreqI[i]/(wdth*lgth); }
 
  /*Liberation memoire*/
@@ -356,7 +356,7 @@ void Mult(float** mat,float coef,int lgth,int wdth)
  int i,j;
 
  /*multiplication*/
-  for(i=0;i<lgth;i++) for(j=0;j<wdth;j++) 
+  for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
     { mat[i][j]*=coef;
       if (mat[i][j]>GREY_LEVEL) mat[i][j]=GREY_LEVEL; }
 }
@@ -382,12 +382,12 @@ void Recal(float** mat,int lgth,int wdth)
 
    max=mat[0][0];
  /*Recherche du max*/
-  for(i=0;i<lgth;i++) for(j=0;j<wdth;j++) 
+  for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
     if (mat[i][j]>max) max=mat[i][j];
 
  /*Recalibre la matrice*/
  for(i=0;i<lgth;i++) for(j=0;j<wdth;j++)
-   mat[i][j]*=(GREY_LEVEL/max);      
+   mat[i][j]*=(GREY_LEVEL/max);
 }
 
 /*----------------------------------------------------------*/
@@ -415,3 +415,11 @@ void SquareMatrix(float** matRout,float** matIout,float** matRin,float** matIin,
      matIout[i][j]=2*matRin[i][j]*matIin[i][j]; }
 }
 
+/*----------------------------------------------------------*/
+/* Power                                                    */
+/*----------------------------------------------------------*/
+int power(int x, int y){
+    if(y == 0)
+      return 1;
+   return (x * power(x,y-1) );
+  }
