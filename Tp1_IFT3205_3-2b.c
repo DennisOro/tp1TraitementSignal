@@ -21,14 +21,15 @@
 /* DEFINITIONS -----------------------------------*/
 /*------------------------------------------------*/
 #define NAME_VISUALISER "display "
-#define NAME_IMG_IN  "D46r"
-#define NAME_IMG_OUT "image-Tp1_IFT3205-1-2"
+#define NAME_IMG_IN  "Monrstein"
+#define NAME_IMG_OUT "image-Tp1_IFT3205-3-2b"
 
 /*------------------------------------------------*/
 /* PROTOTYPE DE FONCTIONS  -----------------------*/
 /*------------------------------------------------*/
 void CenterImg(float** , int, int);
 int  power(int, int);
+void PasseHaut(float** Img, int length, int width);
 
 /*------------------------------------------------*/
 /* IMPLEMENTATION DE FONCTIONS DEMANDEE ----------*/
@@ -41,7 +42,22 @@ void CenterImg(float** Img, int length, int width)
     for(i=0;i<length;i++)
       for(j=0;j<width;j++)
         {
-  	Img[i][j]=Img[i][j] * power((-1), (i+j));
+  	  Img[i][j]=Img[i][j] * power((-1), (i+j));
+        }
+  }
+
+void PasseHaut(float** Img, int length, int width)
+  {
+    int i=0;
+    int j=0;
+    int x=length/2;
+    int y=width/2;
+
+    for(i=0;i<length;i++)
+      for(j=0;j<width;j++)
+        {
+          if (abs(i-x) <= 15 && abs(j-y) <= 15)
+            Img[i][j]=0;
         }
   }
 
@@ -85,12 +101,19 @@ int main(int argc,char **argv)
   /*Module*/
   Mod(MatriceImgM,MatriceImgR,MatriceImgI,length,width);
 
+  /*Passe haut*/
+  PasseHaut(MatriceImgR,length,width);
+  PasseHaut(MatriceImgI,length,width);
+
+  /*IFFT*/
+  IFFTDD(MatriceImgR,MatriceImgI,length,width);
+  CenterImg(MatriceImgR, length, width);
+
   /*Pour visu*/
-  Recal(MatriceImgM,length,width);
-  Mult(MatriceImgM,100.0,length,width);
+  Recal(MatriceImgR,length,width);
 
   /*Sauvegarde de MatriceImgM sous forme d'image pgm*/
-  SaveImagePgm(NAME_IMG_OUT,MatriceImgM,length,width);
+  SaveImagePgm(NAME_IMG_OUT,MatriceImgR,length,width);
 
   /*Liberation memoire pour les matrices*/
   free_fmatrix_2d(MatriceImgR);

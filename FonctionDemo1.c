@@ -414,12 +414,3 @@ void SquareMatrix(float** matRout,float** matIout,float** matRin,float** matIin,
    { matRout[i][j]=SQUARE(matRin[i][j])-SQUARE(matIin[i][j]);
      matIout[i][j]=2*matRin[i][j]*matIin[i][j]; }
 }
-
-/*----------------------------------------------------------*/
-/* Power                                                    */
-/*----------------------------------------------------------*/
-int power(int x, int y){
-    if(y == 0)
-      return 1;
-   return (x * power(x,y-1) );
-  }

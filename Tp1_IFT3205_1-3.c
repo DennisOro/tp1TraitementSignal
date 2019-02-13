@@ -29,6 +29,7 @@
 /*------------------------------------------------*/
 void CenterImg(float** , int, int);
 int  power(int, int);
+void LogAffiche(float** Img, int k, int length, int width);
 
 /*------------------------------------------------*/
 /* IMPLEMENTATION DE FONCTIONS DEMANDEE ----------*/
@@ -55,6 +56,12 @@ void LogAffiche(float** Img, int k, int length, int width)
         {
     Img[i][j]= k * log(1 + abs(Img[i][j]));
         }
+  }
+
+int power(int x, int y){
+    if(y == 0)
+      return 1;
+   return (x * power(x,y-1) );
   }
 
 /*------------------------------------------------*/
@@ -84,7 +91,6 @@ int main(int argc,char **argv)
 
   /*CENTRER*/
   CenterImg(MatriceImgR, length, width);
-  //CenterImg(MatriceImgI, length, width);
 
   /*FFT*/
   FFTDD(MatriceImgR,MatriceImgI,length,width);
@@ -94,7 +100,6 @@ int main(int argc,char **argv)
 
   /*Pour visu*/
   Recal(MatriceImgM,length,width);
-  //Mult(MatriceImgM,100.0,length,width);
   LogAffiche(MatriceImgM,100,length,width);
 
   /*Sauvegarde de MatriceImgM sous forme d'image pgm*/
